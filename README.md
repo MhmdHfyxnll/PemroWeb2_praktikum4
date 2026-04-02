@@ -1,61 +1,173 @@
-# CodeIgniter 4 Framework
+# 🔐 Praktikum 4 - Modul Login CodeIgniter 4
 
-## What is CodeIgniter?
+👤 **Nama:** Naufal Rafi Haryanto
+🆔 **NIM:** 312410118
+📚 **Mata Kuliah:** Pemrograman Web 2
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 🎯 Deskripsi
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Praktikum ini bertujuan untuk mengimplementasikan sistem **Login (Authentication)** menggunakan framework **CodeIgniter 4**.
+Sistem ini memungkinkan user untuk login, mengakses halaman admin, serta membatasi akses menggunakan filter.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+---
 
-## Important Change with index.php
+## ✨ Fitur Utama
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+* 🔐 Login user (tanpa hash / plain password untuk praktikum)
+* 🚪 Logout
+* 🧠 Session login
+* 🛡️ Proteksi halaman admin menggunakan Auth Filter
+* 🎨 Tampilan login modern (UI sederhana)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+---
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## 🗄️ Struktur Database
 
-## Repository Management
+### Tabel: `user`
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+| Field        | Tipe Data | Keterangan  |
+| ------------ | --------- | ----------- |
+| id           | INT       | Primary Key |
+| username     | VARCHAR   | Nama user   |
+| useremail    | VARCHAR   | Email user  |
+| userpassword | VARCHAR   | Password    |
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+---
 
-## Contributing
+## ⚙️ Cara Menjalankan Project
 
-We welcome contributions from the community.
+### 1. Jalankan XAMPP
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+* Aktifkan **Apache**
+* Aktifkan **MySQL**
 
-## Server Requirements
+---
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+### 2. Buat Database
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Masuk ke phpMyAdmin lalu buat database:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+```sql
+CREATE DATABASE lab14_ci;
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+---
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+### 3. Buat Tabel User
+
+```sql
+CREATE TABLE user (
+  id INT(11) AUTO_INCREMENT,
+  username VARCHAR(200) NOT NULL,
+  useremail VARCHAR(200),
+  userpassword VARCHAR(200),
+  PRIMARY KEY (id)
+);
+```
+
+---
+
+### 4. Insert Data User
+
+```sql
+INSERT INTO user (username, useremail, userpassword) VALUES (
+'admin',
+'admin@email.com',
+'admin123'
+);
+```
+
+---
+
+### 5. Konfigurasi Database
+
+Edit file `.env`:
+
+```ini
+database.default.hostname = localhost
+database.default.database = lab14_ci
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+database.default.port = 3306
+```
+
+---
+
+### 6. Jalankan Project
+
+Buka terminal:
+
+```bash
+php spark serve
+```
+
+---
+
+### 7. Akses di Browser
+
+```text
+http://localhost:8080/user/login
+```
+
+---
+
+## 🔑 Login Default
+
+* **Email:** [admin@email.com](mailto:admin@email.com)
+* **Password:** admin123
+
+---
+
+## 🛡️ Sistem Keamanan
+
+* Menggunakan **Session** untuk menyimpan status login
+* Menggunakan **Auth Filter** untuk membatasi akses ke halaman admin
+* User yang belum login akan diarahkan ke halaman login
+
+---
+
+## 📁 Struktur Folder Penting
+
+```
+app/
+├── Controllers/
+│   ├── User.php
+│   └── Artikel.php
+├── Models/
+│   └── UserModel.php
+├── Views/
+│   ├── user/login.php
+│   └── admin/artikel.php
+├── Filters/
+│   └── Auth.php
+```
+
+---
+
+## 🧪 Hasil Pengujian
+
+* ✅ Login berhasil dengan data yang benar
+* ❌ Login gagal jika password salah
+* 🔐 Halaman admin tidak bisa diakses tanpa login
+* 🚪 Logout berhasil menghapus session
+
+---
+
+## 💡 Kesimpulan
+
+Melalui praktikum ini, saya memahami:
+
+* Cara membuat sistem login di CodeIgniter 4
+* Penggunaan session untuk autentikasi
+* Implementasi filter untuk keamanan akses halaman
+
+---
+
+## 🚀 Penutup
+
+Praktikum ini menjadi dasar penting dalam pengembangan sistem autentikasi pada aplikasi web berbasis framework modern.
+
+---
