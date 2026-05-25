@@ -106,21 +106,29 @@ Controller login digunakan untuk:
 ```
 http://127.0.0.1:8080/user/login
 ```
+<img width="1366" height="768" alt="Screenshot from 2026-05-25 20-26-07" src="https://github.com/user-attachments/assets/b29770a2-d98a-4d68-bd1a-a2916d9b8542" />
+
 
 #### Logout
 ```
 http://127.0.0.1:8080/user/logout
 ```
+<img width="1366" height="768" alt="Screenshot from 2026-05-25 20-26-32" src="https://github.com/user-attachments/assets/152097a4-a710-4f1c-9fb3-c8e003e7fd6a" />
+
 
 #### Admin Artikel
 ```
 http://127.0.0.1:8080/admin/artikel
 ```
+<img width="1366" height="768" alt="Screenshot from 2026-05-25 15-11-28" src="https://github.com/user-attachments/assets/8f660f48-47d1-4dd6-ae47-d8e4c3a59ca7" />
+
 
 #### Halaman Artikel
 ```
 http://127.0.0.1:8080/artikel
 ```
+<img width="1366" height="768" alt="Screenshot from 2026-05-25 15-11-53" src="https://github.com/user-attachments/assets/0cbce93c-faaf-4abd-aa43-7e1a54d58807" />
+
 
 ### Hasil Praktikum
 Sistem login berhasil dibuat menggunakan CodeIgniter 4 dengan fitur autentikasi user dan session login.
